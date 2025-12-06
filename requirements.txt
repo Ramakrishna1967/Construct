@@ -1,0 +1,65 @@
+# ==========================================
+# AI Code Reviewer Backend - Dependencies
+# Production-Ready Configuration
+# ==========================================
+
+# Web Framework
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+websockets>=12.0
+python-multipart>=0.0.6
+httpx>=0.26.0
+
+# LangChain & AI (Latest Stable)
+langgraph>=0.2.0
+langchain-google-genai>=2.0.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langchain-text-splitters>=0.3.0
+
+# Vector Store & Embeddings (RAG)
+chromadb>=0.4.22
+sentence-transformers>=2.2.2
+
+# Infrastructure
+docker>=7.0.0
+redis>=5.0.1
+aioredis>=2.0.1
+
+# Code Parsing & Analysis
+tree-sitter>=0.20.0
+tree-sitter-python>=0.20.0
+tree-sitter-javascript>=0.20.0
+radon>=6.0.1
+bandit>=1.7.7
+
+# Git Operations
+gitpython>=3.1.40
+
+# Configuration & Validation
+pydantic>=2.5.3
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+
+# Logging & Monitoring
+python-json-logger>=2.0.7
+structlog>=24.1.0
+prometheus-client>=0.19.0
+
+# Authentication
+PyJWT>=2.8.0
+google-auth>=2.25.0
+
+# Resilience & Rate Limiting
+tenacity>=8.2.3
+asyncio-throttle>=1.0.2
+
+# Testing (dev)
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
+httpx>=0.26.0
+
+# Type Checking (dev)
+mypy>=1.8.0
+types-redis>=4.6.0
