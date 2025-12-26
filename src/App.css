@@ -1,0 +1,177 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+.app-main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Resize handles would go here */
+.resize-handle {
+    position: relative;
+    background: transparent;
+    transition: background var(--transition-fast);
+}
+
+.resize-handle::after {
+    content: '';
+    position: absolute;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.resize-handle:hover::after {
+    opacity: 1;
+}
+
+.resize-handle-horizontal {
+    width: 4px;
+    cursor: col-resize;
+}
+
+.resize-handle-horizontal::after {
+    top: 0;
+    left: 1px;
+    width: 2px;
+    height: 100%;
+}
+
+.resize-handle-vertical {
+    height: 4px;
+    cursor: row-resize;
+}
+
+.resize-handle-vertical::after {
+    left: 0;
+    top: 1px;
+    width: 100%;
+    height: 2px;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bg-tertiary);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    z-index: 1000;
+    animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.success {
+    border-color: var(--success);
+}
+
+.toast.error {
+    border-color: var(--error);
+}
+
+/* Command palette */
+.command-palette {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    max-width: 90vw;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.command-input {
+    width: 100%;
+    padding: var(--space-4);
+    background: transparent;
+    border-bottom: 1px solid var(--border);
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+}
+
+.command-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.command-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.command-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.command-item:hover {
+    background: var(--bg-hover);
+}
+
+.command-item.selected {
+    background: var(--accent-soft);
+}

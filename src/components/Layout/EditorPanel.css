@@ -1,0 +1,172 @@
+.editor-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg-primary);
+}
+
+/* Tab Bar */
+.tab-bar {
+    height: var(--tab-height);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: var(--space-2);
+}
+
+.tab-bar::-webkit-scrollbar {
+    height: 0;
+}
+
+.tabs {
+    display: flex;
+    height: 100%;
+    flex: 1;
+}
+
+/* Editor Run Button */
+.editor-run-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 4px 12px;
+    background: var(--success);
+    color: white;
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+    margin-left: var(--space-2);
+}
+
+.editor-run-btn:hover:not(:disabled) {
+    background: #16a34a;
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+.editor-run-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.editor-run-btn.running {
+    background: var(--warning);
+}
+
+.editor-run-btn .spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 100%;
+    padding: 0 var(--space-3);
+    background: var(--bg-tertiary);
+    border-right: 1px solid var(--border);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.tab:hover {
+    background: var(--bg-hover);
+}
+
+.tab.active {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+}
+
+.tab-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tab-modified {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.tab-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: var(--radius-sm);
+    color: var(--text-tertiary);
+    opacity: 0;
+    transition: all var(--transition-fast);
+}
+
+.tab:hover .tab-close {
+    opacity: 1;
+}
+
+.tab-close:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+}
+
+/* Editor Container */
+.editor-container {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Monaco overrides */
+.editor-container .monaco-editor {
+    padding-top: var(--space-2);
+}
+
+.editor-container .monaco-editor .margin {
+    background: var(--bg-primary) !important;
+}
+
+/* No File State */
+.no-file {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+}
+
+.no-file-content {
+    text-align: center;
+    color: var(--text-tertiary);
+}
+
+.no-file-content h2 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.no-file-content p {
+    font-size: var(--text-base);
+}
