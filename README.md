@@ -1,82 +1,164 @@
-# Construct IDE - AI Code Review Frontend
+# 🚀 Construct – Your First Autonomous AI Employee
 
-A premium, Cursor-style AI Code Review IDE built with React, Vite, and Monaco Editor.
+<div align="center">
 
-![Construct IDE](https://img.shields.io/badge/Construct-IDE-7c3aed?style=for-the-badge)
-![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square)
-![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square)
+![Construct Banner](https://img.shields.io/badge/Construct-Autonomous_AI-6366f1?style=for-the-badge&logo=robot&logoColor=white)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-00d084?style=for-the-badge&logo=vercel&logoColor=white)](https://frontend-theta-one-77.vercel.app)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+
+**Stop chatting with AI. Start managing it.**
+
+*A premium landing page for Construct – an autonomous AI engineering platform where 5 specialized AI agents collaborate to plan, research, code, and review software autonomously.*
+
+[Live Demo](https://frontend-theta-one-77.vercel.app) • [Construct IDE](https://construct-ide.vercel.app) • [Report Bug](https://github.com/Ramakrishna1967/Frontend/issues)
+
+</div>
+
+---
+
+## 🎯 What is Construct?
+
+Construct is an **autonomous AI coding agent** that goes beyond simple AI chat assistants. Instead of answering questions, Construct **actually builds software** through a coordinated team of 5 specialized AI agents:
+
+| Agent | Role | What It Does |
+|-------|------|--------------|
+| 🧠 **Supervisor** | The Orchestrator | Coordinates all agents and manages the workflow |
+| 🧭 **Planner** | The Strategist | Designs the implementation approach and architecture |
+| 🔍 **Researcher** | The Context Gatherer | Searches patterns, best practices, and codebase context |
+| 💻 **Coder** | The Builder | Writes production-quality code |
+| 🛡️ **Reviewer** | The Quality Control | Finds bugs and suggests improvements before deployment |
+
+---
 
 ## ✨ Features
 
-- 🤖 **5 AI Agents**: Supervisor, Planner, Researcher, Coder, Reviewer
-- ⚡ **Real-time Code Review**: WebSocket streaming with your backend
-- 🖥️ **Monaco Editor**: VS Code's editor with syntax highlighting
-- 🔧 **Code Compiler**: Execute Python, JavaScript, Java, C++, Go, Rust, and more
-- 📁 **File Management**: Create, edit, delete files
-- 🌙 **Dark Theme**: Cursor-inspired premium design
+### 🎬 Real-Time Streaming
+Watch the AI think and code token-by-token via WebSockets. No waiting for complete responses.
+
+### 🧠 Context Aware  
+Deep understanding of your entire codebase via Vector Database (ChromaDB) integration. It knows your patterns.
+
+### 🔄 Self-Correcting
+The Reviewer agent actively finds and fixes bugs before deployment. Quality built in, not bolted on.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **React 18** | UI Framework |
+| **TypeScript** | Type Safety |
+| **Vite** | Build Tool & Dev Server |
+| **Framer Motion** | Smooth Animations |
+| **Lucide React** | Modern Icons |
+| **CSS3** | Custom Styling (No frameworks) |
+
+---
+
+## 📁 Project Structure
+
+```
+construct-ui/
+├── src/
+│   ├── components/
+│   │   ├── Hero.tsx           # Main headline & CTA
+│   │   ├── AgentFlow.tsx      # 5 AI agents visualization
+│   │   ├── Features.tsx       # Key feature cards
+│   │   ├── Stats.tsx          # Performance metrics
+│   │   ├── CTA.tsx            # Final call-to-action
+│   │   ├── Footer.tsx         # Site footer
+│   │   └── AnimatedShapes.tsx # 3D background animations
+│   ├── App.tsx                # Main application
+│   ├── main.tsx               # Entry point
+│   └── index.css              # Global styles
+├── public/                    # Static assets
+├── index.html                 # HTML template
+├── package.json               # Dependencies
+├── vite.config.ts             # Vite configuration
+└── tsconfig.json              # TypeScript config
+```
+
+---
 
 ## 🚀 Quick Start
 
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
 ```bash
+# Clone the repository
+git clone https://github.com/Ramakrishna1967/Frontend.git
+
+# Navigate to project
+cd Frontend
+
 # Install dependencies
 npm install
 
 # Start development server
 npm run dev
-
-# Build for production
-npm run build
 ```
 
-## 🔗 Backend Integration
+Visit `http://localhost:5173` to see the app.
 
-This frontend connects to the AI Code Reviewer backend:
-
-| Component | URL |
-|-----------|-----|
-| **Backend API** | https://construct-eb7w.onrender.com |
-| **WebSocket** | wss://construct-eb7w.onrender.com/api/v1/ws |
-| **Health Check** | https://construct-eb7w.onrender.com/health |
-
-## 📦 Deployment
-
-### Deploy to Netlify (Recommended)
-
-1. **Option A: Drag & Drop**
-   - Run `npm run build`
-   - Drag the `dist` folder to [Netlify Drop](https://app.netlify.com/drop)
-
-2. **Option B: GitHub Integration**
-   - Push code to GitHub
-   - Connect repo to Netlify
-   - Auto-deploys on every push
-
-### Deploy to Vercel
+### Build for Production
 
 ```bash
-npm i -g vercel
-vercel --prod
+npm run build
+npm run preview
 ```
 
-## 🏗️ Architecture
+---
 
+## 🌐 Deployment
+
+This project is deployed on **Vercel** with automatic deployments from the `main` branch.
+
+| Environment | URL |
+|-------------|-----|
+| **Landing Page** | [frontend-theta-one-77.vercel.app](https://frontend-theta-one-77.vercel.app) |
+| **Construct IDE** | [construct-ide.vercel.app](https://construct-ide.vercel.app) |
+
+---
+
+## 🎨 Design Highlights
+
+- **Premium Dark Theme** – Deep space black with neon accent gradients
+- **Glassmorphism** – Modern glass-effect cards with backdrop blur
+- **Micro-animations** – Smooth hover effects and scroll-triggered animations
+- **3D Floating Shapes** – Animated geometric shapes in the background
+- **Responsive Design** – Optimized for all screen sizes
+
+---
+
+## 📊 Architecture Overview
+
+```mermaid
+graph TD
+    A[User Request] --> B[Supervisor Agent]
+    B --> C[Planner Agent]
+    C --> D[Researcher Agent]
+    D --> E[Coder Agent]
+    E --> F[Reviewer Agent]
+    F --> G[Output]
+    F -.-> E
 ```
-Frontend (React + Vite)
-        │
-        ├── Monaco Editor (Code editing)
-        ├── WebSocket (Real-time AI chat)
-        ├── Piston API (Code execution)
-        │
-        ▼
-Backend (FastAPI + LangGraph)
-        │
-        ├── 5 AI Agents (Multi-agent review)
-        ├── Redis (Session/memory)
-        ├── ChromaDB (Vector store)
-        └── Gemini 2.0 (LLM)
-```
 
-## 📄 License
+The multi-agent system uses **LangGraph** for orchestration, with each agent specialized for a specific task in the software development lifecycle.
 
-MIT License
+---
+
+## 🔗 Related Repositories
+
+| Project | Description |
+|---------|-------------|
+| [Construct Backend](https://github.com/Ramakrishna1967/Construct) | The AI backend with LangGraph agents |
+| [Construct IDE](https://github.com/Ramakrishna1967/Construct-Frontend) | The full code editor interface |
+
+---
+
+
