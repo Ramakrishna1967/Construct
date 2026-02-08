@@ -16,6 +16,32 @@ Production-ready backend for an AI code review system using LangGraph, Tree-Sitt
 
 ## Architecture
 
+📘 **[Read the Full Architecture Documentation](ARCHITECTURE.md)** for detailed diagrams of workflows, data flow, and agent interactions.
+
+### High-Level Overview
+
+```mermaid
+graph TD
+    User["User / Developer"] -->|HTTPS / WSS| Frontend["Frontend (Vercel)"]
+    Frontend -->|REST API| LoadBalancer["Render Load Balancer"]
+    LoadBalancer -->|Traffic| Backend["Backend API (FastAPI)"]
+    
+    subgraph "Backend Services (Render)"
+        Backend -->|Orchestrates| Supervisor["Supervisor Agent"]
+        Supervisor -->|Delegates| Planner["Planner Agent"]
+        Supervisor -->|Delegates| Researcher["Researcher Agent"]
+        Supervisor -->|Delegates| Coder["Coder Agent"]
+        Supervisor -->|Delegates| Reviewer["Reviewer Agent"]
+        
+        Backend -->|Stores/Retrieves| Redis[("Redis Cache & Session Store")]
+        Backend -->|Embeddings| VectorStore["ChromaDB / Vector Store"]
+        Backend -->|LLM Calls| Gemini["Google Gemini 1.5 Pro"]
+        Backend -->|Sandboxed Exec| Docker["Docker Sandbox"]
+    end
+```
+
+### Project Structure
+
 ```
 backend/
 ├── main.py                 # FastAPI application with WebSocket
@@ -37,5 +63,189 @@ backend/
 ├── requirements.txt       # Python dependencies
 ├── Dockerfile            # Container configuration
 └── .env.example          # Environment variables template
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
