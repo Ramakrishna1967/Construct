@@ -16,9 +16,9 @@ Production-ready backend for an AI code review system using LangGraph, Tree-Sitt
 
 ## Architecture
 
-📘 **[Read the Full Architecture Documentation](ARCHITECTURE.md)** for detailed diagrams of workflows, data flow, and agent interactions.
+### 1. High-Level Architecture Overview
 
-### High-Level Overview
+This diagram shows how the User interacts with the Frontend (deployed on Vercel) and how requests flow to the Backend (deployed on Render), which orchestrates the AI Agents and services.
 
 ```mermaid
 graph TD
@@ -38,6 +38,169 @@ graph TD
         Backend -->|LLM Calls| Gemini["Google Gemini 1.5 Pro"]
         Backend -->|Sandboxed Exec| Docker["Docker Sandbox"]
     end
+```
+
+### 2. Multi-Agent Workflow (LangGraph)
+
+The core intelligent engine of Construct is built on **LangGraph**. A **Supervisor Node** acts as the router, deciding which specialist agent should handle the next step based on the conversation state.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Supervisor
+    
+    state Supervisor {
+        [*] --> AnalyzeState
+        AnalyzeState --> Route: Decision
+    }
+    
+    Route --> Planner: Needs Plan
+    Route --> Researcher: Needs Context
+    Route --> Coder: Needs Code
+    Route --> Reviewer: Needs Review
+    Route --> FINISH: Task Complete
+    
+    state Planner {
+        GeneratePlan --> UpdateState
+    }
+    
+    state Researcher {
+        SearchCode --> AnalyzeFile
+        AnalyzeFile --> UpdateState
+    }
+    
+    state Coder {
+        WriteCode --> ExecuteTool
+        ExecuteTool --> UpdateState
+    }
+    
+    state Reviewer {
+        SecurityScan --> CodeCritique
+        CodeCritique --> UpdateState
+    }
+    
+    Planner --> Supervisor: Return Plan
+    Researcher --> Supervisor: Return Findings
+    Coder --> Supervisor: Return Code/Result
+    Reviewer --> Supervisor: Return Critique
+    
+    FINISH --> [*]
+```
+
+### 3. Request Processing Flow (WebSocket)
+
+This sequence diagram illustrates the real-time communication flow when a user sends a message (e.g., "Fix this bug") via the WebSocket connection.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant WS as WebSocket Endpoint
+    participant G as Graph Orchestrator
+    participant A as Agents
+    participant LLM as Gemini API
+    participant R as Redis
+
+    U->>FE: Sends "Fix bug in main.py"
+    FE->>WS: Send JSON Message
+    WS->>R: Save User Message
+    WS->>G: Invoke Graph(state)
+    
+    loop Agent Loop
+        G->>A: Evaluate Current Node
+        A->>LLM: Generate Response/Action
+        LLM-->>A: Tool Call / Text
+        
+        alt Tool Execution
+            A->>A: Execute Tool (e.g. read_file)
+            A-->>G: Update State with Result
+        else Final Answer
+            A-->>G: Return Answer
+        end
+        
+        G-->>WS: Stream Partial Token / Update
+        WS-->>FE: Stream to UI
+    end
+    
+    G->>R: Save Conversation State
+    WS-->>FE: "Complete" Signal
+    FE-->>U: Display Final Response
+```
+
+### 4. Frontend Component Structure
+
+The React frontend handles the IDE-like interface, managing editor state, file trees, and the chat terminal.
+
+```mermaid
+classDiagram
+    class App {
+        +AppContextProvider
+        +Layout
+    }
+    
+    class AppContext {
+        +activeFile
+        +openFiles
+        +messages[]
+        +sendMessage()
+        +connectWebSocket()
+    }
+    
+    class Sidebar {
+        +FileExplorer
+        +ChatHistory
+    }
+    
+    class EditorArea {
+        +MonacoEditor
+        +Tabs
+    }
+    
+    class ChatPanel {
+        +MessageList
+        +InputArea
+        +StreamingRenderer
+    }
+    
+    class TerminalPanel {
+        +OutputLogs
+        +SystemStatus
+    }
+
+    App --> AppContext : Provides State
+    App --> Sidebar
+    App --> EditorArea
+    App --> ChatPanel
+    EditorArea --> MonacoEditor : Wraps
+    ChatPanel ..> AppContext : Consumes
+    Sidebar ..> AppContext : Consumes
+```
+
+### 5. Security & Sandbox Architecture
+
+Code execution is isolated to prevent malicious or accidental damage to the backend server.
+
+```mermaid
+flowchart LR
+    subgraph "Host (Render)"
+        API["FastAPI Server"]
+        Request["User Request"]
+    end
+    
+    subgraph "Docker Container (Sandbox)"
+        Exec["Python Agent Executor"]
+        FS["Isolated File System"]
+        Network["Restricted Network"]
+    end
+    
+    Request --> API
+    API -->|1. Spin up| Docker
+    Docker -->|2. Mount Code| FS
+    API -->|3. Send Command| Exec
+    Exec -->|4. Run Code| FS
+    FS -->|5. Output/Error| Exec
+    Exec -->|6. Return Result| API
+    
+    style Docker fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
 ### Project Structure
