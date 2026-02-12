@@ -1,4 +1,4 @@
-# AI Code Reviewer Backend
+# AI Code Reviewer
 
 Production-ready backend for an AI code review system using LangGraph, Tree-Sitter, Docker sandbox, and Redis.
 
