@@ -1,22 +1,8 @@
-# AI Code Reviewer
+# Construct AI Code Reviewer - System Architecture
 
-Production-ready backend for an AI code review system using LangGraph, Tree-Sitter, Docker sandbox, and Redis.
+This document provides a comprehensive visual overview of the Construct AI Code Reviewer system architecture, including high-level component interaction, multi-agent workflows, data flow, and deployment structure.
 
-## Features
-
-- **LangGraph Agent System**: Supervisor pattern with specialized worker nodes
-- **Code Indexing**: Tree-Sitter based Python code parsing and analysis
-- **Docker Sandbox**: Safe, isolated code execution with resource limits
-- **Redis State Management**: Persistent state storage with connection pooling
-- **Security**: Path validation, file size limits, command timeouts
-- **Logging**: Structured JSON logging with multiple log levels
-- **Configuration**: Type-safe settings with environment variable validation
-- **Retry Logic**: Automatic retries for LLM calls and Redis connections
-- **WebSocket API**: Real-time code review interactions
-
-## Architecture
-
-### 1. High-Level Architecture Overview
+## 1. High-Level Architecture Overview
 
 This diagram shows how the User interacts with the Frontend (deployed on Vercel) and how requests flow to the Backend (deployed on Render), which orchestrates the AI Agents and services.
 
@@ -40,7 +26,7 @@ graph TD
     end
 ```
 
-### 2. Multi-Agent Workflow (LangGraph)
+## 2. Multi-Agent Workflow (LangGraph)
 
 The core intelligent engine of Construct is built on **LangGraph**. A **Supervisor Node** acts as the router, deciding which specialist agent should handle the next step based on the conversation state.
 
@@ -86,7 +72,7 @@ stateDiagram-v2
     FINISH --> [*]
 ```
 
-### 3. Request Processing Flow (WebSocket)
+## 3. Request Processing Flow (WebSocket)
 
 This sequence diagram illustrates the real-time communication flow when a user sends a message (e.g., "Fix this bug") via the WebSocket connection.
 
@@ -126,7 +112,7 @@ sequenceDiagram
     FE-->>U: Display Final Response
 ```
 
-### 4. Frontend Component Structure
+## 4. Frontend Component Structure
 
 The React frontend handles the IDE-like interface, managing editor state, file trees, and the chat terminal.
 
@@ -175,7 +161,7 @@ classDiagram
     Sidebar ..> AppContext : Consumes
 ```
 
-### 5. Security & Sandbox Architecture
+## 5. Security & Sandbox Architecture
 
 Code execution is isolated to prevent malicious or accidental damage to the backend server.
 
@@ -202,27 +188,3 @@ flowchart LR
     
     style Docker fill:#f9f,stroke:#333,stroke-width:2px
 ```
-
-### Project Structure
-
-```
-backend/
-├── main.py                 # FastAPI application with WebSocket
-├── src/
-│   ├── config.py          # Centralized configuration management
-│   ├── logging_config.py  # Logging setup
-│   ├── agent/             # LangGraph agent system
-│   │   ├── graph.py       # Graph definition with state initialization
-│   │   ├── nodes.py       # Supervisor, coder, and planner nodes
-│   │   ├── prompts.py     # System prompts
-│   │   └── state.py       # Agent state definition
-│   ├── services/          # Infrastructure services
-│   │   ├── indexer.py     # Tree-Sitter code indexing
-│   │   ├── redis_store.py # Redis operations
-│   │   └── sandbox.py     # Docker container execution
-│   └── tools/             # Agent tools
-│       ├── file_ops.py    # File read/write/list with validation
-│       └── terminal.py    # Command execution with timeout
-├── requirements.txt       # Python dependencies
-├── Dockerfile            # Container configuration
-└── .env.example          # Environment variables template

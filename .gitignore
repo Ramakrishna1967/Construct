@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -20,38 +21,16 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
-venv/
-ENV/
-env/
-.venv/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.nox/
-
-# Environment
+# Environment Variables
 .env
-.env.local
-*.env
+.env.*
+!.env.example
 
-# Database
-.chroma/
-*.db
-*.sqlite3
+# VS Code
+.vscode/
 
-# Logs
-*.log
-logs/
+# Editor
+Untitled-*.txt
 
 # OS
 .DS_Store
