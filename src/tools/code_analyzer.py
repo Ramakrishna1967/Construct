@@ -295,16 +295,16 @@ class CodeAnalyzer:
         
         # Overall quality
         if metrics.maintainability_index >= 80:
-            parts.append("✓ Good maintainability")
+            parts.append("[ok] Good maintainability")
         elif metrics.maintainability_index >= 60:
-            parts.append("◐ Moderate maintainability")
+            parts.append("[~] Moderate maintainability")
         else:
-            parts.append("✗ Low maintainability")
+            parts.append("[fail] Low maintainability")
         
         # Complexity
         high_complexity = [c for c in complexity if c.risk in ["high", "very-high"]]
         if high_complexity:
-            parts.append(f"⚠ {len(high_complexity)} function(s) with high complexity")
+            parts.append(f"[!] {len(high_complexity)} function(s) with high complexity")
         
         # Code ratio
         code_lines = metrics.lines_of_code - metrics.blank_lines - metrics.comment_lines
@@ -371,7 +371,7 @@ def analyze_complexity(path: str) -> str:
             if result.get('complexity'):
                 output.append("\nFunction Complexity:")
                 for c in sorted(result['complexity'], key=lambda x: -x['complexity'])[:10]:
-                    risk_icon = {"low": "✓", "medium": "◐", "high": "⚠", "very-high": "✗"}.get(c['risk'], "?")
+                    risk_icon = {"low": "[ok]", "medium": "[~]", "high": "[!]", "very-high": "[fail]"}.get(c['risk'], "?")
                     output.append(f"  {risk_icon} {c['name']}: {c['complexity']} ({c['risk']})")
             
             return "\n".join(output)
@@ -399,9 +399,9 @@ def analyze_complexity(path: str) -> str:
             ]
             
             if high_complexity_files:
-                output.append(f"\n⚠ High Complexity Files ({len(high_complexity_files)}):")
+                output.append(f"\n[!] High Complexity Files ({len(high_complexity_files)}):")
                 for fp, cc in sorted(high_complexity_files, key=lambda x: -x[1])[:5]:
-                    output.append(f"  • {os.path.basename(fp)}: {cc}")
+                    output.append(f"  - {os.path.basename(fp)}: {cc}")
             
             return "\n".join(output)
         else:
