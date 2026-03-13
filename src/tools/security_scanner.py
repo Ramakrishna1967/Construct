@@ -295,7 +295,7 @@ def security_scan(path: str) -> str:
             return f"Error: Path not found: {path}"
         
         if not issues:
-            return "✓ No security issues found"
+            return "[ok] No security issues found"
         
         # Group by severity
         by_severity = {"CRITICAL": [], "HIGH": [], "MEDIUM": [], "LOW": []}
@@ -309,7 +309,7 @@ def security_scan(path: str) -> str:
                 output.append(f"\n{severity} ({len(by_severity[severity])}):")
                 for issue in by_severity[severity][:5]:  # Limit per severity
                     output.append(
-                        f"  • {issue.message}\n"
+                        f"  - {issue.message}\n"
                         f"    {issue.file_path}:{issue.line_number}"
                     )
         
@@ -352,12 +352,12 @@ def check_secrets(path: str) -> str:
         ]
         
         if not secret_issues:
-            return "✓ No hardcoded secrets detected"
+            return "[ok] No hardcoded secrets detected"
         
-        output = [f"⚠ Found {len(secret_issues)} potential secret(s):\n"]
+        output = [f"[!] Found {len(secret_issues)} potential secret(s):\n"]
         for issue in secret_issues[:10]:
             output.append(
-                f"  • {issue.message}\n"
+                f"  - {issue.message}\n"
                 f"    {issue.file_path}:{issue.line_number}"
             )
         

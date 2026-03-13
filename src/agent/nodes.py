@@ -288,7 +288,7 @@ def supervisor_node(state: AgentState) -> Dict[str, Any]:
         if state.get("tool_results"):
             recent_tools = state["tool_results"][-3:]
             tools_summary = "\n".join([
-                f"- {t['tool_name']}: {'✓' if t['success'] else '✗'}"
+                f"- {t['tool_name']}: {'[ok]' if t['success'] else '[fail]'}"
                 for t in recent_tools
             ])
             context_parts.append(f"Recent Tool Results:\n{tools_summary}")

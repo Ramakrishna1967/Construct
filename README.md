@@ -4,15 +4,15 @@ Production-ready backend for an AI code review system using LangGraph, Tree-Sitt
 
 ## Features
 
-- **🤖 LangGraph Agent System**: Supervisor pattern with specialized worker nodes
-- **🔍 Code Indexing**: Tree-Sitter based Python code parsing and analysis
-- **🐳 Docker Sandbox**: Safe, isolated code execution with resource limits
-- **💾 Redis State Management**: Persistent state storage with connection pooling
-- **🔒 Security**: Path validation, file size limits, command timeouts
-- **📊 Logging**: Structured JSON logging with multiple log levels
-- **⚙️ Configuration**: Type-safe settings with environment variable validation
-- **🔄 Retry Logic**: Automatic retries for LLM calls and Redis connections
-- **🌐 WebSocket API**: Real-time code review interactions
+- **LangGraph Agent System**: Supervisor pattern with specialized worker nodes
+- **Code Indexing**: Tree-Sitter based Python code parsing and analysis
+- **Docker Sandbox**: Safe, isolated code execution with resource limits
+- **Redis State Management**: Persistent state storage with connection pooling
+- **Security**: Path validation, file size limits, command timeouts
+- **Logging**: Structured JSON logging with multiple log levels
+- **Configuration**: Type-safe settings with environment variable validation
+- **Retry Logic**: Automatic retries for LLM calls and Redis connections
+- **WebSocket API**: Real-time code review interactions
 
 ## Architecture
 

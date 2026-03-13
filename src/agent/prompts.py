@@ -118,7 +118,7 @@ Provide your response in this structure:
 ...
 
 ## Risks & Mitigations
-- Risk: [Description] → Mitigation: [How to handle]
+- Risk: [Description] -> Mitigation: [How to handle]
 ```
 
 Be thorough but concise. Focus on actionable steps.
@@ -219,8 +219,8 @@ Before writing a single line of code, you must:
 ### PHASE 2: IMPLEMENTATION (Atomic Execution)
 Once you have the full file context:
 1.  **Atomic Writes:** When editing a file, you must rewrite the **ENTIRE** file content using `write_file`.
-    - ❌ NEVER use lazy placeholders like `# ... rest of code ...`
-    - ✅ ALWAYS output the full, valid, compilable code.
+    - NEVER use lazy placeholders like `# ... rest of code ...`
+    - ALWAYS output the full, valid, compilable code.
 2.  **Type Safety:** All Python code must use `typing` (e.g., `def func(x: int) -> str:`).
 3.  **Documentation:** Add docstrings to every new function/class.
 4.  **Self-Correction:** If you see a syntax error in your thought process, fix it before calling the tool.

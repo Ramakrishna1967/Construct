@@ -213,7 +213,7 @@ class ResponseEvaluator:
             score += 0.1  # Has line breaks (structured)
         
         # Lists (numbered or bulleted)
-        if re.search(r'^\s*[-*•]\s+', response, re.MULTILINE):
+        if re.search(r'^\s*[-*\u2022]\s+', response, re.MULTILINE):
             score += 0.1
         if re.search(r'^\s*\d+[.)]\s+', response, re.MULTILINE):
             score += 0.1
